@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block home_current %}current{% endblock home_current %}
+{% block main_content %}
+<h1 class="main-heading">Welcome to El Minya, my Home Town</h1>
+<p>I was born in <a href="https://en.wikipedia.org/wiki/Minya,_Egypt" alt="link to my home town page in wikipedia">El
+        Minya Egypt</a>. It is located approximately 245 km (152 mi) south of Cairo on the western bank of the Nile
+    River, which flows north through the city. The name of the city is derived from its Ancient Egyptian name Men'at
+    Khufu, meaning the nursing city of Khufu, linking it to the Pharaoh Khufu or Cheops, builder of the Great Pyramid
+    at Giza. </p>
+<p>Minya is dubbed by the locals "Bride of Upper Egypt", in reference to its strategic location in Middle Egypt as a
+    vital link between the north and the south of Egypt. Minya has one of the highest concentration of Coptic
+    Christians in Egypt (approximately 50% of total population).[1] It is the home city of the Minia University,
+    Suzanne Mubarak Center for Arts, the new Minya Museum, and the regional North of Upper Egypt Radio and Television.</p>
+<p><b>This is the map of El Minya</b></p>
+
+<img src="../static/img/city-map.gif" alt="" class="city-map img-fluid img-thumbnail">
+<h2 class="secondary-heading">What others say about El Minya</h2>
+{% for comment in guest_comments %}
+<dl class="alert alert-info">
+    <dt> {{ comment[0] }} {{ comment[1] }}</dt>
+    <dd>{{ comment[2]}}</dd>
+</dl>
+{% endfor %}
+{% endblock main_content %}
+{% block side_content %}
+<h2 class="secondary-heading">Guest Book</h2>
+<p>Welcome Guest Book, please leave your comment about my city. comments will appear in the comments section</p> 
+{% if error %}
+<ul class="alert alert-danger guest-book-messages">
+{% for message in error %}
+<li>{{ message }}</li>
+{% endfor %}
+</ul>
+<a class="alert alert-warning try-again-link" href="{{ url_for('guest_book') }}">Try Again</a>
+{% endif %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul class="alert alert-success guest-book-messages">
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+<a class="alert alert-warning another-comment-link" href="{{ url_for('guest_book') }}">Add another Comment</a>
+
+{% endif %}
+{% endwith %}
+<form id="contact-form" action="{{ url_for('guest_book') }}"  method="POST" >
+    <fieldset class="form-group ">
+        <div class="">
+            <label class="form-control-label" for="full-name">
+                <i class="fas fa-id-card icon"></i> First Name:</label>
+            <span id="first-name-error"></span>
+            <input class="form-control" type="text" name="first-name" id="first-name" required>
+            <label class="form-control-label" for="last-name">
+                <i class="fas fa-id-card icon"></i> Last Name:</label>
+            <span id="last-name-error"></span>
+            <input class="form-control" type="text" name="last-name" id="last-name" required>
+            <label for="email" class="form-control-label"><i class="fa fa-envelope fa-fw"></i> Email Address:</label>
+            <span id="email-error"></span>
+            <input class="form-control" type="email" id="email" name="email" required>
+            <label for="inquiry" class="form-control-label">
+                <i class="fas fa-pen-square"></i> Comment</label>
+            <textarea class="form-control" id="guest-comment" name="guest-comment" placeholder="please write your comment here..."
+                required rows="4"></textarea>
+            <button type="submit" class="btn btn-success" id="guest-submitBtn">Submit</button>
+            <button type="reset" class="btn" id="guest-clear-btn">Clear</button>
+        </div>
+    </fieldset>
+</form>
+<div class="reg_or_login">
+{% if not session %}
+<p>Register for an account to provide feedback</p>
+<a href="{{ url_for('register') }}" class="btn btn-primary">Register</a> 
+<p>Already Registered Login below </p> 
+<a href="{{ url_for('login')}}" class="btn btn-success">Login</a> 
+{% else %}
+<p class="btn-info login-info">Logged in as {{ session['first_name']}} {{ session['last_name'] }}</p>
+<a href="{{ url_for('logout') }}" class="btn btn-success">Logout</a> 
+
+{% endif %}
+</div>
+{% endblock side_content %}

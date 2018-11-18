@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block feedback_current %} current {% endblock feedback_current %}
+{% block main_content %}
+<h1 class="main-heading">Feedback and Recommendations</h1>
+<p>other users feedback, write your feedback to appear below</p>
+{% if users_feedback %}
+{% for feedback in users_feedback %}
+<dl class="alert alert-success">
+    <dt>{{ feedback[1] }} {{ feedback[2] }}</dt>
+    <dd>{{ feedback[3] }}</dd>
+</dl>
+{% endfor %}
+{% endif %}
+{% endblock main_content %}
+{% block side_content %}
+<h2 class="secondary-heading">Write Feedback</h2>
+{% if not session %}
+<div class="reg_or_login">
+    <p>Register for an account to provide feedback</p>
+    <a href="{{ url_for('register') }}" class="btn btn-primary">Register</a>
+    <p>Already Registered Login below </p>
+    <a href="{{ url_for('login')}}" class="btn btn-success">Login</a>
+</div>
+{% else %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul class="alert alert-success guest-book-messages">
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+<a class="alert alert-warning another-comment-link" href="{{ url_for('guest_book') }}">Add another Comment</a>
+
+{% endif %}
+{% endwith %}
+<p class="btn-info login-info">Logged in as {{ session['first_name']}} {{ session['last_name'] }}</p>
+<form id="feedback-form" action="{{ url_for('user_feedback') }}" method="POST">
+    <fieldset class="form-group ">
+        <div class="">
+            <label for="inquiry" class="form-control-label">
+                <i class="fas fa-pen-square"></i> Feedback</label>
+            <textarea class="form-control" id="user-feedback" name="user-feedback" placeholder="please write your feedback here..."
+                required rows="4"></textarea>
+            <button type="submit" class="btn btn-success" id="guest-submitBtn">Submit</button>
+            <button type="reset" class="btn" id="guest-clear-btn">Clear</button>
+        </div>
+    </fieldset>
+</form>
+{% endif %}
+
+
+{% endblock side_content %}

@@ -1,0 +1,143 @@
+.wrapper {
+    min-height: calc(100vh - 105px);
+}
+
+/* logo styles 
+==============*/
+
+.site-logo {
+    width: 80px;
+    height: 80px;
+    box-shadow: 0 0 40px rgb(78, 39, 5);
+}
+
+.site-logo:hover {
+    opacity: .75;
+}
+
+/* navigation styles 
+=====================*/
+
+ul.navbar-nav li.nav-item a.nav-link {
+    font-family: 'Patrick Hand', cursive;
+    text-align: center;
+    font-size: 18px;
+    color: #73080d;
+    margin-right: 5px;
+}
+
+ul.navbar-nav li.nav-item a.nav-link:hover {
+    opacity: .75;
+    color: black;
+    font-weight: bold;
+    box-shadow: 0 0 40px rgb(78, 39, 5);
+}
+
+ul.navbar-nav li.nav-item a.nav-link.current {
+    color: black;
+    box-shadow: 0 0 40px rgb(78, 39, 5);
+    opacity: 1;
+    font-weight: bold;
+}
+
+header, footer {
+    background-color: rgba(249, 205, 168, 0.75);
+}
+
+/* page headings styles 
+========================*/
+
+.main-heading, .secondary-heading {
+    background-color: rgba(249, 205, 168, 0.75);
+    box-shadow: 0 0 15px rgb(78, 39, 5);
+    padding: 10px;
+    color: #73080d;
+    text-align: center;
+    margin-top: 20px;
+    border-right: 5px solid #73080d;
+    border-left: 5px solid #73080d;
+    margin-bottom: 20px;
+}
+
+.main-heading {
+    font-size: 32px;
+}
+
+.secondary-heading {
+    font-size: 22px;
+}
+
+/* footer styles 
+=================*/
+
+.footer-info {
+    text-align: center;
+}
+
+.copyright {
+    text-align: right;
+}
+
+/* guestbook form styles 
+=========================*/
+
+#guest-submitBtn {
+    margin-top: 10px;
+    width: 65%;
+}
+
+#guest-clear-btn {
+    margin-top: 10px;
+    width: 30%;
+    float: right;
+}
+
+/* guest book messages
+=======================*/
+
+.guest-book-messages {
+    list-style-type: none;
+    text-align: center;
+}
+
+.try-again-link, .another-comment-link {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.reg_or_login {
+    border: #73080d 5px double;
+    padding: 20px;
+    text-align: center;
+}
+
+.reg_or_login p {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.reg_or_login a {
+    width: 70%;
+}
+
+.login-info {
+    padding: 20px;
+}
+
+/* image styles 
+================*/
+
+.city-map, .city-img {
+    width: 100%;
+    margin: 0 auto;
+    height: 450px;
+}
+.account-details {
+    list-style-type: none;
+}
+
+.city-img{
+
+}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block account_current %} current {% endblock account_current %}
+{% block main_content %}
+<h1 class="main-heading">Register</h1>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul class="alert alert-success guest-book-messages">
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+<form id="register-form" action="{{ url_for('register') }}" method="POST">
+    <fieldset class="form-group ">
+        <div class="">
+            <label class="form-control-label" for="full-name">
+                <i class="fas fa-id-card icon"></i> First Name:</label>
+            <input class="form-control" type="text" name="first-name" id="first-name" required>
+            <label class="form-control-label" for="last-name">
+                <i class="fas fa-id-card icon"></i> Last Name:</label>
+            <input class="form-control" type="text" name="last-name" id="last-name" required>
+            <label for="email" class="form-control-label">
+                <i class="fa fa-envelope fa-fw"></i> Email Address:</label>
+            <input class="form-control" type="email" id="email" name="email" required>
+            <label for="password" class="form-control-label">
+                <i class="fa fa-envelope fa-fw"></i> Password</label>
+            <input class="form-control" type="password" id="password" name="password" required>
+            <button type="submit" class="btn btn-primary" id="guest-submitBtn">Register</button>
+            <button type="reset" class="btn" id="guest-clear-btn">Clear</button>
+        </div>
+    </fieldset>
+</form>
+{% endblock main_content %}
+{% block side_content %}
+<h2 class="secondary-heading">Login</h2>
+{% if login_error %}
+<ul class="alert alert-danger guest-book-messages">
+{% for message in login_error %}
+<li>{{ message }}</li>
+{% endfor %}
+</ul>
+<a class="alert alert-warning try-again-link" href="{{ url_for('login') }}">Try Again</a>
+{% endif %}
+<form id="login-form" action="{{ url_for('login') }}" method="POST">
+        <fieldset class="form-group ">
+            <div class="">
+                <label for="email" class="form-control-label">
+                    <i class="fa fa-envelope fa-fw"></i> Email Address:</label>
+                <input class="form-control" type="email" id="email" name="email" required>
+                <label for="password" class="form-control-label">
+                    <i class="fa fa-envelope fa-fw"></i> Password</label>
+                <input class="form-control" type="password" id="password" name="password" required>
+                <button type="submit" class="btn btn-success" id="guest-submitBtn">Login</button>
+                <button type="reset" class="btn" id="guest-clear-btn">Clear</button>
+            </div>
+        </fieldset>
+    </form>
+{% endblock side_content %}

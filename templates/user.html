@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block main_content %}
+<h1 class="main-heading">Previous Feedback</h1>
+<p>Write your feedback to appear here</p>
+{% if users_feedback %}
+    {% for feedback in users_feedback %}
+    {% if feedback[0] == session['user_id'] %}
+    <dl class="alert alert-success">
+        <dt>{{ feedback[1] }} {{ feedback[2] }}</dt>
+        <dd>{{ feedback[3] }}</dd>
+    </dl>
+    {% endif%}
+    {% endfor %}
+{% endif %} 
+
+{% endblock main_content %}
+{% block side_content %}
+<h2 class="secondary-heading">Account Information</h2>
+<ul class="account-details alert alert-info">
+<li>Account Number : {{ session['user_id'] }}</li>
+<li>First Name : {{ session['first_name'] }} </li>
+<li>Last Name : {{ session['last_name'] }}</li>
+<li>Email Address : {{ session['user_email'] }}</li>
+</ul>
+<a href="{{ url_for('logout') }}" class="btn btn-success">Logout</a> 
+{% endblock side_content %}
