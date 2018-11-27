@@ -49,14 +49,11 @@
         <div class="">
             <label class="form-control-label" for="full-name">
                 <i class="fas fa-id-card icon"></i> First Name:</label>
-            <span id="first-name-error"></span>
             <input class="form-control" type="text" name="first-name" id="first-name" required>
             <label class="form-control-label" for="last-name">
                 <i class="fas fa-id-card icon"></i> Last Name:</label>
-            <span id="last-name-error"></span>
             <input class="form-control" type="text" name="last-name" id="last-name" required>
             <label for="email" class="form-control-label"><i class="fa fa-envelope fa-fw"></i> Email Address:</label>
-            <span id="email-error"></span>
             <input class="form-control" type="email" id="email" name="email" required>
             <label for="inquiry" class="form-control-label">
                 <i class="fas fa-pen-square"></i> Comment</label>
@@ -68,15 +65,14 @@
     </fieldset>
 </form>
 <div class="reg_or_login">
-{% if not session %}
+{% if LOGGED_OUT  %}
 <p>Register for an account to provide feedback</p>
 <a href="{{ url_for('register') }}" class="btn btn-primary">Register</a> 
 <p>Already Registered Login below </p> 
 <a href="{{ url_for('login')}}" class="btn btn-success">Login</a> 
-{% else %}
+{% elif LOGGED_IN %}
 <p class="btn-info login-info">Logged in as {{ session['first_name']}} {{ session['last_name'] }}</p>
 <a href="{{ url_for('logout') }}" class="btn btn-success">Logout</a> 
-
 {% endif %}
 </div>
 {% endblock side_content %}

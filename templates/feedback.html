@@ -12,16 +12,18 @@
 {% endfor %}
 {% endif %}
 {% endblock main_content %}
+
 {% block side_content %}
 <h2 class="secondary-heading">Write Feedback</h2>
-{% if not session %}
+{% if LOGGED_OUT  %}
 <div class="reg_or_login">
     <p>Register for an account to provide feedback</p>
     <a href="{{ url_for('register') }}" class="btn btn-primary">Register</a>
     <p>Already Registered Login below </p>
     <a href="{{ url_for('login')}}" class="btn btn-success">Login</a>
 </div>
-{% else %}
+{% endif %}
+
 {% with messages = get_flashed_messages() %}
 {% if messages %}
 <ul class="alert alert-success guest-book-messages">
@@ -30,9 +32,10 @@
     {% endfor %}
 </ul>
 <a class="alert alert-warning another-comment-link" href="{{ url_for('guest_book') }}">Add another Comment</a>
-
 {% endif %}
 {% endwith %}
+
+{% if LOGGED_IN  %}
 <p class="btn-info login-info">Logged in as {{ session['first_name']}} {{ session['last_name'] }}</p>
 <form id="feedback-form" action="{{ url_for('user_feedback') }}" method="POST">
     <fieldset class="form-group ">
@@ -47,6 +50,5 @@
     </fieldset>
 </form>
 {% endif %}
-
 
 {% endblock side_content %}
